@@ -1,0 +1,65 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #0f2027;
+    color: white;
+}
+
+.controls {
+    margin: 20px;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    background: #00c6ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#visualization {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.node {
+    background: white;
+    color: black;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    min-width: 60px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.node.active {
+    background: yellow;
+}
+
+.arrow {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.algorithm-box {
+    margin-top: 40px;
+    background: #203a43;
+    padding: 20px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.step {
+    padding: 5px;
+}
+
+.step.active-step {
+    background: orange;
+}
