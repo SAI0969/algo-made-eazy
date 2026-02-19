@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Linked List Learning Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🔗 Linked List Learning Visualizer</h1>
+
+<div class="controls">
+    <select id="listType">
+        <option value="singly">Singly Linked List</option>
+        <option value="doubly">Doubly Linked List</option>
+        <option value="circular">Circular Linked List</option>
+    </select>
+
+    <input type="number" id="value" placeholder="Enter Value">
+
+    <button onclick="insertNode()">Insert</button>
+    <button onclick="deleteNode()">Delete</button>
+    <button onclick="searchNode()">Search</button>
+</div>
+
+<div id="visualization"></div>
+
+<div class="algorithm-box">
+    <h3>Algorithm Steps</h3>
+    <div id="algorithm"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
