@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Linked List Learning Visualizer</title>
+    <title>Linked List Search Visualizer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🔗 Linked List Learning Visualizer</h1>
+<div class="container">
 
-<div class="controls">
-    <select id="listType">
-        <option value="singly">Singly Linked List</option>
-        <option value="doubly">Doubly Linked List</option>
-        <option value="circular">Circular Linked List</option>
-    </select>
+    <!-- LEFT SIDE -->
+    <div class="left">
+        <h2>Linked List</h2>
 
-    <input type="number" id="value" placeholder="Enter Value">
+        <input type="number" id="value" placeholder="Enter value">
+        <button onclick="insertNode()">Insert</button>
+        <button onclick="searchNode()">Search</button>
 
-    <button onclick="insertNode()">Insert</button>
-    <button onclick="deleteNode()">Delete</button>
-    <button onclick="searchNode()">Search</button>
-</div>
+        <div id="visualization"></div>
+    </div>
 
-<div id="visualization"></div>
+    <!-- RIGHT SIDE -->
+    <div class="right">
+        <h3>C Search Function</h3>
+        <div id="code"></div>
 
-<div class="algorithm-box">
-    <h3>Algorithm Steps</h3>
-    <div id="algorithm"></div>
+        <div class="variables">
+            <p>position: <span id="pos">-</span></p>
+            <p>start->info: <span id="current">-</span></p>
+            <p>key: <span id="key">-</span></p>
+            <p>found: <span id="found">-</span></p>
+        </div>
+    </div>
+
 </div>
 
 <script src="script.js"></script>
