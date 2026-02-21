@@ -1,6 +1,41 @@
 let list = [];
 let delay = 800;
 
+/* C Code Lines */
+const cCode = [
+"void search(struct node *start, int key) {",
+"    int position = 1;",
+"    int found = 0;",
+"",
+"    while (start != NULL) {",
+"        if (start->info == key) {",
+"            printf(\"Element %d found at position %d.\");",
+"            found = 1;",
+"            break;",
+"        }",
+"        start = start->next;",
+"        position++;",
+"    }",
+"",
+"    if (!found) {",
+"        printf(\"Element not found.\");",
+"    }",
+"}"
+];
+
+function renderCode(activeLine = -1) {
+    let codeDiv = document.getElementById("code");
+    codeDiv.innerHTML = "";
+
+    cCode.forEach((line, index) => {
+        let div = document.createElement("div");
+        div.className = "code-line";
+        if (index === activeLine) div.classList.add("highlight");
+        div.innerText = line;
+        codeDiv.appendChild(div);
+    });
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -8,10 +43,8 @@ function sleep(ms) {
 function draw(activeIndex = -1) {
     let viz = document.getElementById("visualization");
     viz.innerHTML = "";
-    let type = document.getElementById("listType").value;
 
     list.forEach((val, index) => {
-
         let node = document.createElement("div");
         node.className = "node";
         if (index === activeIndex) node.classList.add("active");
@@ -20,104 +53,70 @@ function draw(activeIndex = -1) {
 
         let arrow = document.createElement("div");
         arrow.className = "arrow";
-
-        if (type === "singly") {
-            arrow.innerText = index === list.length - 1 ? "→ NULL" : "→";
-        }
-
-        if (type === "doubly") {
-            arrow.innerText = index === list.length - 1 ? "→ NULL" : "⇄";
-        }
-
-        if (type === "circular") {
-            arrow.innerText = index === list.length - 1 ? "↺" : "→";
-        }
-
+        arrow.innerText = index === list.length - 1 ? "→ NULL" : "→";
         viz.appendChild(arrow);
     });
 }
 
-function showAlgorithm(steps, activeStep) {
-    let algoBox = document.getElementById("algorithm");
-    algoBox.innerHTML = "";
-
-    steps.forEach((step, index) => {
-        let div = document.createElement("div");
-        div.className = "step";
-        if (index === activeStep) div.classList.add("active-step");
-        div.innerText = step;
-        algoBox.appendChild(div);
-    });
-}
-
-async function insertNode() {
+function insertNode() {
     let value = document.getElementById("value").value;
     if (!value) return;
-
-    let steps = [
-        "1. Create new node",
-        "2. If list empty, make it head",
-        "3. Else traverse to last node",
-        "4. Link last node to new node"
-    ];
-
-    for (let i = 0; i < steps.length; i++) {
-        showAlgorithm(steps, i);
-        await sleep(delay);
-    }
-
-    list.push(value);
+    list.push(parseInt(value));
     draw();
 }
 
 async function searchNode() {
-    let value = document.getElementById("value").value;
-    if (!value) return;
 
-    let steps = [
-        "1. Start from head",
-        "2. Compare node value",
-        "3. If match found → Stop",
-        "4. Else move to next node"
-    ];
+    let key = document.getElementById("value").value;
+    if (!key) return;
+    key = parseInt(key);
 
-    for (let i = 0; i < list.length; i++) {
+    document.getElementById("key").innerText = key;
 
-        showAlgorithm(steps, 1);
-        draw(i);
-        await sleep(delay);
+    let position = 1;
+    let found = 0;
 
-        if (list[i] == value) {
-            alert("Value Found at position " + i);
-            return;
-        }
-    }
+    renderCode(1);
+    document.getElementById("pos").innerText = position;
+    await sleep(delay);
 
-    alert("Value Not Found");
-}
-
-async function deleteNode() {
-    let value = document.getElementById("value").value;
-    if (!value) return;
-
-    let steps = [
-        "1. Traverse to find node",
-        "2. Update links",
-        "3. Remove node"
-    ];
+    renderCode(2);
+    document.getElementById("found").innerText = found;
+    await sleep(delay);
 
     for (let i = 0; i < list.length; i++) {
 
+        renderCode(4);
         draw(i);
         await sleep(delay);
 
-        if (list[i] == value) {
-            list.splice(i, 1);
-            showAlgorithm(steps, 2);
-            draw();
+        renderCode(5);
+        document.getElementById("current").innerText = list[i];
+        await sleep(delay);
+
+        if (list[i] === key) {
+
+            renderCode(7);
+            found = 1;
+            document.getElementById("found").innerText = found;
+            await sleep(delay);
+
+            alert("Element found at position " + position);
             return;
         }
+
+        renderCode(10);
+        await sleep(delay);
+
+        renderCode(11);
+        position++;
+        document.getElementById("pos").innerText = position;
+        await sleep(delay);
     }
 
-    alert("Value Not Found");
+    renderCode(14);
+    alert("Element not found in the list.");
 }
+
+renderCode();
+draw();
